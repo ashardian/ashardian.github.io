@@ -77,6 +77,42 @@
             padding: 10px 0;
             position: relative;
         }
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+            nav a {
+                padding: 10px;
+            }
+            .hero {
+                height: 300px;
+            }
+            .hero h1 {
+                font-size: 2.5em;
+                padding: 0 10px;
+            }
+            .container {
+                padding: 10px;
+            }
+            .container h2 {
+                font-size: 1.5em;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero {
+                height: 200px;
+            }
+            .hero h1 {
+                font-size: 2em;
+            }
+            .container h2 {
+                font-size: 1.25em;
+            }
+            nav a {
+                padding: 8px;
+                font-size: 0.875em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -91,7 +127,7 @@
         <a href="#contact">Contact</a>
     </nav>
     <div class="hero">
-        <h1>Welcome to My Web Page</h1>
+        <h1>Welcome to My Page</h1>
     </div>
     <div class="container" id="home">
         <h2>Home</h2>
