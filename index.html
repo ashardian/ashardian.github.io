@@ -148,7 +148,82 @@
                 padding: 10px;
             }
         }
+
+        /* Notification Styles */
+        .notification {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .notification.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        @keyframes fadein {
+            from { bottom: 0; opacity: 0; }
+            to { bottom: 30px; opacity: 1; }
+        }
+        @keyframes fadeout {
+            from { bottom: 30px; opacity: 1; }
+            to { bottom: 0; opacity: 0; }
+        }
     </style>
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showNotification("Right-click is disabled.");
+        });
+
+        // Disable specific keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+                showNotification("Viewing source is disabled.");
+            }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J' || e.key === 'c' || e.key === 'C')) {
+                e.preventDefault();
+                showNotification("Developer tools are disabled.");
+            }
+            if (e.key === 'F12') {
+                e.preventDefault();
+                showNotification("Developer tools are disabled.");
+            }
+        });
+
+        // Notification function
+        function showNotification(message) {
+            var notification = document.getElementById("notification");
+            notification.textContent = message;
+            notification.className = "notification show";
+            setTimeout(function() {
+                notification.className = notification.className.replace("show", "");
+            }, 3000);
+        }
+
+        // Prevent screenshot via user-agent capabilities if possible (Note: This is not foolproof)
+        document.addEventListener('keyup', function(e) {
+            if (e.key === 'PrintScreen') {
+                navigator.clipboard.writeText('');
+                showNotification("Screenshots are disabled.");
+            }
+        });
+
+        // Block attempts to copy content
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            showNotification("Content copying is disabled.");
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -223,62 +298,7 @@
         <p>&copy; 2024 Ashar Dian. All rights reserved.</p>
     </div>
 
-    <script>
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'PrintScreen') {
-                alert('Screenshots are disabled on this webpage.');
-                event.preventDefault();
-            }
-        });
-
-        document.addEventListener('keyup', function(event) {
-            if (event.key === 'PrintScreen') {
-                navigator.clipboard.writeText('Screenshots are disabled on this webpage.').then(function() {
-                    alert('Screenshots are disabled on this webpage.');
-                }, function() {
-                    alert('Screenshots are disabled on this webpage.');
-                });
-            }
-        });
-
-        document.addEventListener('contextmenu', function(event) {
-            event.preventDefault();
-        });
-
-        document.addEventListener('dragstart', function(event) {
-            event.preventDefault();
-        });
-
-        document.addEventListener('selectstart', function(event) {
-            event.preventDefault();
-        });
-
-        <title>Disable Right Click</title>
-    <script>
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-         // Disable right-click
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // Disable specific keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I')) {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.shiftKey && (e.key === 'j' || e.key === 'J')) {
-                e.preventDefault();
-            }
-            if (e.key === 'F12') {
-                e.preventDefault();
-            }
-        });
-        });
-    </script>
+    <!-- Notification element -->
+    <div id="notification" class="notification"></div>
 </body>
 </html>
