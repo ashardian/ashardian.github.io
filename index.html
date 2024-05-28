@@ -253,7 +253,11 @@
             event.preventDefault();
         });
 
-       
+        <title>Disable Right Click</title>
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
         });
     </script>
 </body>
