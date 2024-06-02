@@ -265,6 +265,371 @@
             e.preventDefault();
             showNotification("Copying content is disabled.");
         });
+
+        // Continuously check for DevTools opening
+        setInterval(() => {
+            if (window.devtools.open) {
+                showNotification("Developer tools are disabled.");
+                document.querySelector('.content').classList.add('hidden-content');
+            } else {
+                document.querySelector('.content').classList.remove('hidden-content');
+            }
+        }, 1000);
+
+        // Prevent page source viewing by blocking F12 and Ctrl+U
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+                showNotification("Viewing page source is disabled.");
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="content">
+        <header>
+            <h1>Welcome to Ashar Dian's Web Page</h1>
+        </header>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#cybersecurity">Cybersecurity</a>
+            <a href="#qualification">Qualification</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="hero">
+            <h1>Your Security, My Priority</h1>
+        </div>
+        <div class="container" id="about">
+            <h2>About</h2>
+            <p>Hello! My name is Ashar Dian, and I am a cybersecurity professional. Welcome to my Web Page where I showcase my projects, share my knowledge, and connect with fellow enthusiasts. I am a dedicated cybersecurity professional with extensive experience in protecting systems, networks, and data from cyber threats. My expertise includes network security, penetration testing, and implementing robust security protocols to safeguard sensitive information. I am passionate about staying up-to-date with the latest cybersecurity trends and continuously improving my skills.</p>
+        </div>
+        <div class="container" id="cybersecurity">
+            <h2>Cybersecurity</h2>
+            <p>Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks. These cyberattacks are usually aimed at accessing, changing, or destroying sensitive information, extorting money from users, or interrupting normal business processes.</p>
+            <p>Effective cybersecurity measures include multiple layers of protection spread across the computers, networks, programs, or data that one intends to keep safe. In an organization, the people, processes, and technology must all complement one another to create an effective defense from cyber attacks.</p>
+            <h3>Key Concepts in Cybersecurity:</h3>
+            <ul>
+                <li><strong>Network Security:</strong> Protecting the network infrastructure from unauthorized access, misuse, or theft.</li>
+                <li><strong>Application Security:</strong> Keeping software and devices free of threats. A compromised application could provide access to the data its designed to protect.</li>
+                <li><strong>Information Security:</strong> Protecting the integrity and privacy of data, both in storage and in transit.</li>
+                <li><strong>Operational Security:</strong> Includes the processes and decisions for handling and protecting data assets. The permissions users have when accessing a network and the procedures that determine how and where data may be stored or shared all fall under this umbrella.</li>
+                <li><strong>Disaster Recovery and Business Continuity:</strong> Defining how an organization responds to a cybersecurity incident or any other event that causes the loss of operations or data.</li>
+                <li><strong>End-User Education:</strong> Teaching users to understand and follow basic principles of cybersecurity. For example, they need to know to delete suspicious email attachments, avoid plugging in unidentified USB drives, and be aware of potential phishing schemes.</li>
+            </ul>
+        </div>
+        <div class="container" id="qualification">
+            <h2>Qualification</h2>
+            <p>My qualifications include a blend of formal education, certifications, and hands-on experience in the field of cybersecurity. Here are some highlights:</p>
+            <ul>
+                <li>Bachelor's Degree in Cyber Security</li>
+                <li>Certified Information Systems Security Professional (CISSP)</li>
+                <li>Certified Ethical Hacker (CEH)</li>
+                <li>CompTIA Security+ Certification</li>
+                <li>Extensive experience with penetration testing tools such as Metasploit and Nmap</li>
+                <li>Proficient in programming languages like Python, JavaScript, and Bash</li>
+            </ul>
+        </div>
+        <div class="container" id="contact">
+            <h2>Contact</h2>
+            <div class="social-icons">
+                <a href="mailto:ashardian.pk@gmail.com"><i class="far fa-envelope"></i></a>
+                <a href="https://www.instagram.com/ashardian_?utm_source=qr&igsh=MTlrbjlvYWdseHNzbg==" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/ashar-dian-43a114298?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://x.com/ashardian_?s=08" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 Ashar Dian. All rights reserved.</p>
+        </div>
+    </div>
+    <div id="notification" class="notification"></div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashar Dian's Web Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            overflow-x: hidden;
+        }
+        .content {
+            display: block;
+        }
+        .hidden-content {
+            display: none;
+        }
+        header {
+            background-color: #1f2a36;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #1f2a36;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            flex: 1;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: #35495e;
+        }
+        .hero {
+            background: url('https://img.freepik.com/free-photo/cyber-attack-with-unrecognizable-hooded-hacker-using-virtual-reality-digital-glitch-effect_146671-18945.jpg?t=st=1716919867~exp=1716923467~hmac=f83b92c23898ea691602f067ac6707072afb80f78b8b25c6ffed60abdebba30e&w=900') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .hero h1 {
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            position: relative;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .container h2 {
+            text-align: left;
+            margin-top: 0;
+            font-size: 1.8em;
+            color: #2b3e50;
+            border-bottom: 2px solid #2b3e50;
+            padding-bottom: 10px;
+        }
+        .container p, .container ul {
+            line-height: 1.6;
+            text-align: left;
+        }
+        .container ul {
+            padding-left: 20px;
+        }
+        .container ul li {
+            margin-bottom: 10px;
+        }
+        .footer {
+            background-color: #1f2a36;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .social-icons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .social-icons a {
+            color: #333; /* Dark color for icons */
+            margin: 0 10px;
+            font-size: 30px; /* Increased size of icons */
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #35495e; /* Darker color on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            nav a {
+                padding: 10px;
+                flex: 100%;
+            }
+            .container {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 300px;
+            }
+            .hero h1 {
+                font-size: 2em;
+            }
+            .container {
+                padding: 10px;
+            }
+        }
+
+        /* Notification Styles */
+        .notification {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .notification.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        @keyframes fadein {
+            from { bottom: 0; opacity: 0; }
+            to { bottom: 30px; opacity: 1; }
+        }
+        @keyframes fadeout {
+            from { bottom: 30px; opacity: 1; }
+            to { bottom: 0; opacity: 0; }
+        }
+    </style>
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showNotification("Right-click is disabled.");
+        });
+
+        // Disable specific keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J' || e.key === 'c' || e.key === 'C')) ||
+                e.key === 'F12' || (e.metaKey && e.altKey && (e.key === 'i' || e.key === 'I'))) {
+                e.preventDefault();
+                showNotification("Developer tools are disabled.");
+            }
+        });
+
+        // Notification function
+        function showNotification(message) {
+            var notification = document.getElementById("notification");
+            notification.textContent = message;
+            notification.className = "notification show";
+            setTimeout(function() {
+                notification.className = notification.className.replace("show", "");
+            }, 3000);
+        }
+
+        // Detect DevTools open
+        (function() {
+            const devtools = {
+                open: false,
+                orientation: null
+            };
+            const threshold = 160;
+            const emitEvent = (state) => {
+                window.dispatchEvent(new CustomEvent('devtoolschange', {
+                    detail: {
+                        open: state.open,
+                        orientation: state.orientation
+                    }
+                }));
+            };
+
+            setInterval(() => {
+                const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+                const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+                const orientation = widthThreshold ? 'vertical' : 'horizontal';
+
+                if (!(heightThreshold && widthThreshold) &&
+                    ((window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) || widthThreshold || heightThreshold)) {
+                    if (!devtools.open || devtools.orientation !== orientation) {
+                        devtools.open = true;
+                        devtools.orientation = orientation;
+                        emitEvent(devtools);
+                    }
+                } else {
+                    if (devtools.open) {
+                        devtools.open = false;
+                        devtools.orientation = null;
+                        emitEvent(devtools);
+                    }
+                }
+            }, 500);
+
+            window.devtools = devtools;
+        })();
+
+        window.addEventListener('devtoolschange', (e) => {
+            if (e.detail.open) {
+                document.querySelector('.content').classList.add('hidden-content');
+            } else {
+                document.querySelector('.content').classList.remove('hidden-content');
+            }
+        });
+
+        // Prevent screenshot via user-agent capabilities if possible (Note: This is not foolproof)
+        document.addEventListener('keyup', function(e) {
+            if (e.key === 'PrintScreen') {
+                navigator.clipboard.writeText('');
+                showNotification("Screenshots are disabled.");
+            }
+        });
+
+        // Block attempts to copy content
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            showNotification("Copying content is disabled.");
+        });
+
+        // Continuously check for DevTools opening
+        setInterval(() => {
+            if (window.devtools.open) {
+                showNotification("Developer tools are disabled.");
+                document.querySelector('.content').classList.add('hidden-content');
+            } else {
+                document.querySelector('.content').classList.remove('hidden-content');
+            }
+        }, 1000);
+
+        // Prevent page source viewing by blocking F12 and Ctrl+U
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+                showNotification("Viewing page source is disabled.");
+            }
+        });
     </script>
 </head>
 <body>
