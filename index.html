@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashar Dian | Ethical Hacker Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <!-- Only one feather-icons script is needed, use the official CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <!-- Security & AI Crawler Block -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai">
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai">
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai">
+    <meta name="DuckDuckBot" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai">
+    <meta name="ChatGPTBot" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai">
+    <meta name="OpenAI" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai">
+    <meta name="GPTBot" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai">
+    <meta name="robots" content="none">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            500: '#3b82f6',
+                        },
+                        secondary: {
+                            500: '#10b981',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(11, 15, 25, 0.9) 0%, rgba(23, 37, 84, 0.8) 100%);
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .terminal {
+            font-family: 'Courier New', monospace;
+        }
+        /* Custom style for mobile nav overlay */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 100;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+        .mobile-nav-overlay.active {
+            pointer-events: auto;
+        }
+        .mobile-nav-modal {
+            /* Glassmorphism / mirror-like effect */
+            background: rgba(30, 41, 59, 0.55);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.18);
+            padding: 2rem 1.5rem;
+            min-width: 80vw;
+            max-width: 340px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: auto;
+            animation: fadeInScale 0.25s;
+        }
+        @media (min-width: 480px) {
+            .mobile-nav-modal {
+                min-width: 340px;
+            }
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95);}
+            to { opacity: 1; transform: scale(1);}
+        }
+        .mobile-nav-overlay .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            align-items: center;
+        }
+        .mobile-nav-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: rgba(30,41,59,0.5);
+            border: none;
+            border-radius: 9999px;
+            padding: 0.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.2s;
+        }
+        .mobile-nav-close:hover {
+            background: rgba(30,41,59,0.8);
+        }
+        .mobile-nav-overlay-bg {
+            position: absolute;
+            inset: 0;
+            background: rgba(17,24,39,0.35);
+            /* subtle dark overlay */
+            z-index: 0;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <div id="vanta-bg" class="fixed inset-0 -z-10"></div>
+    
+    <!-- Navigation -->
+    <nav class="bg-gray-900/80 backdrop-blur-md fixed w-full z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <span class="text-secondary-500 font-bold text-xl">Ashar Dian</span>
+                    </div>
+                    <!-- Desktop Nav -->
+                    <div class="hidden md:block nav-menu">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#home" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-800">Home</a>
+                            <a href="#whoami" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-800">Whoami</a>
+                            <a href="#skills" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-800">Skillset</a>
+                            <a href="#projects" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-800">Projects</a>
+                            <a href="#pdfs" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-800">PDFs</a>
+                            <a href="#contact" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-800">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="darkModeBtn" class="p-2 rounded-full hover:bg-gray-800" aria-label="Toggle dark mode">
+                        <i data-feather="moon"></i>
+                    </button>
+                    <button id="mobileMenuBtn" class="p-2 rounded-full hover:bg-gray-800 md:hidden" aria-label="Toggle menu">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Nav Overlay (hidden by default) -->
+        <div id="mobileNavOverlay" class="mobile-nav-overlay hidden md:hidden">
+            <div class="mobile-nav-overlay-bg"></div>
+            <div class="mobile-nav-modal relative">
+                <button class="mobile-nav-close" aria-label="Close menu" onclick="closeMobileNav()">
+                    <i data-feather="x"></i>
+                </button>
+                <div class="nav-links w-full">
+                    <a href="#home" class="block w-full text-center px-6 py-3 rounded-md text-base font-medium hover:bg-gray-800" onclick="closeMobileNav()">Home</a>
+                    <a href="#whoami" class="block w-full text-center px-6 py-3 rounded-md text-base font-medium hover:bg-gray-800" onclick="closeMobileNav()">Whoami</a>
+                    <a href="#skills" class="block w-full text-center px-6 py-3 rounded-md text-base font-medium hover:bg-gray-800" onclick="closeMobileNav()">Skillset</a>
+                    <a href="#projects" class="block w-full text-center px-6 py-3 rounded-md text-base font-medium hover:bg-gray-800" onclick="closeMobileNav()">Projects</a>
+                    <a href="#pdfs" class="block w-full text-center px-6 py-3 rounded-md text-base font-medium hover:bg-gray-800" onclick="closeMobileNav()">PDFs</a>
+                    <a href="#contact" class="block w-full text-center px-6 py-3 rounded-md text-base font-medium hover:bg-gray-800" onclick="closeMobileNav()">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center">
+                <div class="terminal mb-6">
+                    <div class="flex items-center justify-center">
+                        <div class="h-3 w-3 bg-red-500 rounded-full mr-2"></div>
+                        <div class="h-3 w-3 bg-yellow-500 rounded-full mr-2"></div>
+                        <div class="h-3 w-3 bg-green-500 rounded-full"></div>
+                    </div>
+                    <p class="text-gray-400 mt-2">root@hacker:~$ Welcome to my network</p>
+                    <p class="text-gray-400">------------------------------------</p>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Ethical Hacker &<br><span class="text-primary-500">Security Researcher</span></h1>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8">Specializing in penetration testing, bug bounties, and cybersecurity research to protect digital assets.</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#projects" class="px-8 py-3 bg-primary-500 hover:bg-primary-600 rounded-md font-medium transition-all duration-300">View Projects</a>
+                    <a href="#contact" class="px-8 py-3 border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white rounded-md font-medium transition-all duration-300">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Whoami Section -->
+    <section id="whoami" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-16 relative">
+                <span class="relative">
+                    Whoami
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-500"></span>
+                </span>
+            </h2>
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="https://static.photos/technology/1024x576/149" alt="Hacker" class="rounded-lg shadow-xl w-full">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-4">I'm an ethical hacker specializing in:</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i data-feather="check" class="text-secondary-500 mr-2 mt-1"></i>
+                            <span>Penetration Testing & Vulnerability Assessment</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-feather="check" class="text-secondary-500 mr-2 mt-1"></i>
+                            <span>Web Application & Network Security</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-feather="check" class="text-secondary-500 mr-2 mt-1"></i>
+                            <span>Security Research & Threat Analysis</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-feather="check" class="text-secondary-500 mr-2 mt-1"></i>
+                            <span>Bug Bounty Programs & Responsible Disclosure</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 p-6 bg-gray-800 rounded-lg border-l-4 border-primary-500">
+                        <p class="italic text-gray-300">"In the digital world, we're all just ones and zeros waiting to be hacked. My job is to find those vulnerabilities before the bad actors do."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skillset Section -->
+    <section id="skills" class="py-20 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-16 relative">
+                <span class="relative">
+                    Skillset
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-500"></span>
+                </span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-secondary-500">Certifications</h3>
+                    <ul class="space-y-4">
+                        <li class="skill-card p-6 bg-gray-900 rounded-lg transition-all duration-300">
+                            <div class="flex items-center">
+                                <i data-feather="award" class="text-primary-500 mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold">Cybersecurity: Basic to Advanced course</h4>
+                                    <p class="text-gray-400 text-sm"> ITSOLERA PVT LTD</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="skill-card p-6 bg-gray-900 rounded-lg transition-all duration-300">
+                            <div class="flex items-center">
+                                <i data-feather="award" class="text-primary-500 mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold">BS in Cyber Security</h4>
+                                    <p class="text-gray-400 text-sm"></p>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Added Certification 3 -->
+                        <li class="skill-card p-6 bg-gray-900 rounded-lg transition-all duration-300">
+                            <div class="flex items-center">
+                                <i data-feather="award" class="text-primary-500 mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold">Cyber Security Expert</h4>
+                                    <p class="text-gray-400 text-sm">Google</p>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Added Certification 4 -->
+                        <li class="skill-card p-6 bg-gray-900 rounded-lg transition-all duration-300">
+                            <div class="flex items-center">
+                                <i data-feather="award" class="text-primary-500 mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold">CompTIA Security+</h4>
+                                    <p class="text-gray-400 text-sm">CompTIA</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-secondary-500">Technical Skills</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-900 rounded-full text-sm">Penetration Testing</span>
+                        <span class="px-4 py-2 bg-gray-900 rounded-full text-sm">Vulnerability Assessment</span>
+                        <span class="px-4 py-2 bg-gray-900 rounded-full text-sm">Web App Security</span>
+                        <span class="px-4 py-2 bg-gray-900 rounded-full text-sm">Network Security</span>
+                        <span class="px-4 py-2 bg-gray-900 rounded-full text-sm">Command Line</span>
+                        <span class="px-4 py-2 bg-gray-900 rounded-full text-sm">Cryptography</span>
+                        <span class="px-4 py-2 bg-gray-900 rounded-full text-sm">Metasploit</span>
+                        <span class="px-4 py-2 bg-gray-900 rounded-full text-sm">Burp Suite</span>
+                        <span class="px-4 py-2 bg-gray-900 rounded-full text-sm">Nmap</span>
+                        <span class="px-4 py-2 bg-gray-900 rounded-full text-sm">Wireshark</span>
+                        <span class="px-4 py-2 bg-gray-900 rounded-full text-sm">OWASP Top 10</span>
+                        <span class="px-4 py-2 bg-gray-900 rounded-full text-sm">Python</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-16 relative">
+                <span class="relative">
+                    Projects
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-500"></span>
+                </span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+                    <img src="https://github.com/ashardian/Vpn-Guard/blob/main/1757415314148.jpeg?raw=true" alt="ASPS" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Vpn-Guard</h3>
+                        <p class="text-gray-300 mb-4">Universal Linux VPN security toolkit — blocks leaks, disables IPv6, enforces killswitch & safe DNS for WireGuard, OpenVPN, and more</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Python</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Security</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">vpn guard</span>
+                        </div>
+                        <a href="https://github.com/ashardian/Vpn-Guard" target="_blank" class="text-primary-500 hover:text-primary-400 font-medium inline-flex items-center">
+                            View Project <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+                    <img src="https://user-images.githubusercontent.com/73609472/119419242-3b5b7100-bcd0-11eb-9c2d-1afbfaf84122.png" alt="Recon Tool" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Recon Tool</h3>
+                        <p class="text-gray-300 mb-4">Lightweight, modular reconnaissance CLI tool for red team and penetration testing scenarios.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Bash</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Reconnaissance</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Pentesting</span>
+                        </div>
+                        <a href="https://github.com/ashardian/recon-tool" target="_blank" class="text-primary-500 hover:text-primary-400 font-medium inline-flex items-center">
+                            View Project <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+                    <img src="https://github.com/ashardian/PayloadForge/blob/main/img.png?raw=true" alt="PayloadForge" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">PayloadForge</h3>
+                        <p class="text-gray-300 mb-4">Advanced offensive security tool to generate, mutate, encode, and test payloads for web vulnerabilities.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Python</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Payloads</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Security</span>
+                        </div>
+                        <a href="https://github.com/ashardian/PayloadForge" target="_blank" class="text-primary-500 hover:text-primary-400 font-medium inline-flex items-center">
+                            View Project <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+                    <img src="https://github.com/ashardian/BlackEye/blob/main/img/1.png?raw=true" alt="BlackEye" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">BlackEye (Modified Version)</h3>
+                        <p class="text-gray-300 mb-4">Phishing Toolkit with Cloudflared & LAN Support for security awareness training.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Python</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Phishing</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Education</span>
+                        </div>
+                        <a href="https://github.com/ashardian/BlackEye" target="_blank" class="text-primary-500 hover:text-primary-400 font-medium inline-flex items-center">
+                            View Project <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+                    <img src="https://github.com/ashardian/Linux-disk-repair/blob/main/1758566103474.jpeg?raw=true" alt="Linux disk repair" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Linux disk repair</h3>
+                        <p class="text-gray-300 mb-4">DSK Repair – Intelligent Disk Repair Utility</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">disk repair</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">linux</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Logging</span>
+                        </div>
+                        <a href="https://github.com/ashardian/Linux-disk-repair" target="_blank" class="text-primary-500 hover:text-primary-400 font-medium inline-flex items-center">
+                            View Project <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+                    <img src="http://static.photos/technology/640x360/107" alt="RedTeam Dashboard" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Advanced Screen Protection Suite</h3>
+                        <p class="text-gray-300 mb-4">The Advanced Screen Protection Suite is your go-to solution for ensuring screen security and managing sandbox environments.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">screen protection</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">Visualization</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded-full text-xs">sandbox</span>
+                        </div>
+                        <a href="https://github.com/ashardian/ASPS" target="_blank" class="text-primary-500 hover:text-primary-400 font-medium inline-flex items-center">
+                            View Project <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PDFs Section -->
+    <section id="pdfs" class="py-20 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-16 relative">
+                <span class="relative">
+                    PDF Collection
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-500"></span>
+                </span>
+            </h2>
+            
+            <div class="bg-gray-900 rounded-xl p-8 max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-1/3">
+                        <img src="http://static.photos/technology/640x360/105" alt="PDF Collection" class="rounded-lg shadow-lg w-full">
+                    </div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-2xl font-bold mb-4">Cybersecurity Resources</h3>
+                        <p class="text-gray-300 mb-6">Explore my curated collection of cybersecurity PDFs, research papers, and educational resources covering various aspects of ethical hacking and information security.</p>
+                        <a href="https://terabox.com/s/1JSOQKiekhf-M2uaiAj8RBA" target="_blank" class="inline-flex items-center px-6 py-3 bg-primary-500 hover:bg-primary-600 rounded-md font-medium transition-all duration-300">
+                            <i data-feather="file-text" class="mr-2"></i>
+                            Open PDF Collection
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-16 relative">
+                <span class="relative">
+                    Contact
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-500"></span>
+                </span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Get In Touch</h3>
+                    <p class="text-gray-300 mb-8">Have a security challenge or interested in collaborating? Feel free to reach out through any of the channels below.</p>
+                    
+                    <div class="space-y-6">
+                        <button onclick="window.location.href='mailto:zerodayguardian@onionmail.com'" class="w-full flex items-center px-4 py-3 bg-gray-800 hover:bg-primary-500 transition-colors rounded-lg focus:outline-none group">
+                            <span class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center mr-4">
+                                <i data-feather="mail" class="text-primary-500 group-hover:text-white"></i>
+                            </span>
+                            <span class="text-left">
+                                <h4 class="font-medium">Email</h4>
+                                <span class="text-gray-400 group-hover:text-white">contact@ashardian.io</span>
+                            </span>
+                        </button>
+                        
+                        <button onclick="window.location.href='https://github.com/ashardian'" class="w-full flex items-center px-4 py-3 bg-gray-800 hover:bg-primary-500 transition-colors rounded-lg focus:outline-none group">
+                            <span class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center mr-4">
+                                <i data-feather="github" class="text-primary-500 group-hover:text-white"></i>
+                            </span>
+                            <span class="text-left">
+                                <h4 class="font-medium">GitHub</h4>
+                                <span class="text-gray-400 group-hover:text-white">github.com/ashardian</span>
+                            </span>
+                        </button>
+                        
+                        <button onclick="window.location.href='https://linkedin.com/in/ashardian01'" class="w-full flex items-center px-4 py-3 bg-gray-800 hover:bg-primary-500 transition-colors rounded-lg focus:outline-none group">
+                            <span class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center mr-4">
+                                <i data-feather="linkedin" class="text-primary-500 group-hover:text-white"></i>
+                            </span>
+                            <span class="text-left">
+                                <h4 class="font-medium">LinkedIn</h4>
+                                <span class="text-gray-400 group-hover:text-white">linkedin.com/in/ashardian</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                
+               
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-secondary-500 font-bold text-xl">Ashar Dian</span>
+                    <p class="text-gray-400 mt-1">Securing the digital frontier.</p>
+                </div>
+              
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>© 2025 Ashar Dian. All rights reserved. Ethical Hacking Only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Security: Disable right-click, text selection, drag, and some key combos
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener('keydown', function(e) {
+            // Disable F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, Ctrl+Shift+C, Ctrl+Shift+J, Ctrl+P, Ctrl+C, Ctrl+V, Ctrl+X, Ctrl+A
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "C" || e.key === "J")) ||
+                (e.ctrlKey && (e.key === "U" || e.key === "S" || e.key === "P" || e.key === "C" || e.key === "V" || e.key === "X" || e.key === "A"))
+            ) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        });
+
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize feather icons
+            feather.replace();
+
+            // Initialize Vanta.js background if available
+            if (typeof VANTA !== "undefined" && VANTA.NET) {
+                VANTA.NET({
+                    el: "#vanta-bg",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0x3b82f6,
+                    backgroundColor: 0x111827,
+                    points: 10.00,
+                    maxDistance: 20.00,
+                    spacing: 15.00
+                });
+            }
+
+            // Dark mode toggle
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            darkModeBtn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                const icon = darkModeBtn.querySelector('i');
+                if (document.documentElement.classList.contains('dark')) {
+                    icon.setAttribute('data-feather', 'moon');
+                } else {
+                    icon.setAttribute('data-feather', 'sun');
+                }
+                feather.replace();
+            });
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+            // Hide navMenu on mobile, use overlay instead
+            if (mobileMenuBtn && mobileNavOverlay) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    const isOpen = !mobileNavOverlay.classList.contains('hidden');
+                    if (isOpen) {
+                        mobileNavOverlay.classList.add('hidden');
+                        mobileNavOverlay.classList.remove('active');
+                        mobileMenuBtn.querySelector('i').setAttribute('data-feather', 'menu');
+                    } else {
+                        mobileNavOverlay.classList.remove('hidden');
+                        setTimeout(() => mobileNavOverlay.classList.add('active'), 10);
+                        mobileMenuBtn.querySelector('i').setAttribute('data-feather', 'x');
+                    }
+                    feather.replace();
+                });
+            }
+
+            // Close mobile nav when clicking a link or close button
+            window.closeMobileNav = function() {
+                const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                if (mobileNavOverlay && mobileMenuBtn) {
+                    mobileNavOverlay.classList.add('hidden');
+                    mobileNavOverlay.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').setAttribute('data-feather', 'menu');
+                    feather.replace();
+                }
+            };
+
+            // Hide overlay on resize to md and up
+            window.addEventListener('resize', function() {
+                const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                if (window.innerWidth >= 768 && mobileNavOverlay && mobileMenuBtn) {
+                    mobileNavOverlay.classList.add('hidden');
+                    mobileNavOverlay.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').setAttribute('data-feather', 'menu');
+                    feather.replace();
+                }
+            });
+
+            // Optional: close menu when clicking outside modal
+            document.addEventListener('mousedown', function(e) {
+                const overlay = document.getElementById('mobileNavOverlay');
+                const modal = overlay ? overlay.querySelector('.mobile-nav-modal') : null;
+                if (
+                    overlay && modal &&
+                    !overlay.classList.contains('hidden') &&
+                    !modal.contains(e.target) &&
+                    !e.target.closest('#mobileMenuBtn')
+                ) {
+                    closeMobileNav();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
