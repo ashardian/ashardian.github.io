@@ -157,7 +157,7 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button id="darkModeBtn" class="p-2 rounded-full hover:bg-gray-800" aria-label="Toggle dark mode">
+                    
                         <i data-feather="moon"></i>
                     </button>
                     <button id="mobileMenuBtn" class="p-2 rounded-full hover:bg-gray-800 md:hidden" aria-label="Toggle menu">
@@ -694,18 +694,6 @@
                 });
             }
 
-            // Dark mode toggle
-            const darkModeBtn = document.getElementById('darkModeBtn');
-            darkModeBtn.addEventListener('click', () => {
-                document.documentElement.classList.toggle('dark');
-                const icon = darkModeBtn.querySelector('i');
-                if (document.documentElement.classList.contains('dark')) {
-                    icon.setAttribute('data-feather', 'moon');
-                } else {
-                    icon.setAttribute('data-feather', 'sun');
-                }
-                feather.replace();
-            });
 
             // Mobile menu toggle
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
