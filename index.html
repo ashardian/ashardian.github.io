@@ -1277,13 +1277,15 @@ if (barSection) barObserver.observe(barSection);
   const ua = navigator.userAgent || '';
   const isBot = botPatterns.some(p => ua.toLowerCase().includes(p.toLowerCase()));
 
-  // 2. Headless browser detection (no plugins, no languages, automation flags)
+  // 2. Headless browser detection — only hard automation flags (safe on mobile)
   const isHeadless =
     navigator.webdriver === true ||
-    !navigator.plugins || navigator.plugins.length === 0 ||
-    !navigator.languages || navigator.languages.length === 0 ||
-    window.callPhantom || window._phantom ||
-    window.__nightmare || document.__selenium_unwrapped;
+    window.callPhantom ||
+    window._phantom ||
+    window.__nightmare ||
+    document.__selenium_unwrapped ||
+    window.domAutomation ||
+    window.domAutomationController;
 
   // 3. If bot or headless — wipe visible content, show decoy
   if (isBot || isHeadless) {
