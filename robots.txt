@@ -1,9 +1,23 @@
-# ── robots.txt for ashardian.github.io ──
-# Block ALL crawlers by default
-User-agent: *
-Disallow: /
+# ── Allow search engines ──
+User-agent: Googlebot
+Allow: /
 
-# ── AI Training Bots ──
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# ── Block AI training bots ──
 User-agent: GPTBot
 Disallow: /
 
@@ -55,25 +69,7 @@ Disallow: /
 User-agent: YouBot
 Disallow: /
 
-# ── Search Engine Crawlers ──
-User-agent: Googlebot
-Disallow: /
-
-User-agent: Bingbot
-Disallow: /
-
-User-agent: Slurp
-Disallow: /
-
-User-agent: DuckDuckBot
-Disallow: /
-
-User-agent: Baiduspider
-Disallow: /
-
-User-agent: YandexBot
-Disallow: /
-
+# ── Block SEO/scraper bots (optional, doesn't affect ranking) ──
 User-agent: AhrefsBot
 Disallow: /
 
@@ -86,7 +82,6 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
-# ── Scrapers / Archiving ──
 User-agent: ia_archiver
 Disallow: /
 
@@ -99,4 +94,4 @@ Disallow: /
 User-agent: DataForSeoBot
 Disallow: /
 
-# No sitemap intentionally
+Sitemap: https://ashardian.github.io/sitemap.xml
