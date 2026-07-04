@@ -4,7 +4,37 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="google-site-verification" content="E5T0jOvK95hP-7cuhgFRff2K5DGDs2rpbHlcYJg5IN4" /> 
-<title>Ashar Dian | Ethical Hacker Portfolio</title>
+<title>Ashar Dian | Ethical Hacker & Penetration Tester Portfolio</title>
+<meta name="description" content="Portfolio of Ashar Dian, a self-taught ethical hacker and penetration tester specializing in bug bounty hunting, IDOR/Broken Access Control, and open-source security tooling including OnionSite-Aegis."/>
+<link rel="canonical" href="https://ashardian.github.io/"/>
+
+<!-- ── Open Graph ── -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://ashardian.github.io/"/>
+<meta property="og:title" content="Ashar Dian | Ethical Hacker & Penetration Tester Portfolio"/>
+<meta property="og:description" content="Self-taught ethical hacker and penetration tester specializing in bug bounty hunting, IDOR/Broken Access Control, and open-source security tooling."/>
+<meta property="og:site_name" content="Ashar Dian Portfolio"/>
+
+<!-- ── Twitter Card ── -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Ashar Dian | Ethical Hacker & Penetration Tester Portfolio"/>
+<meta name="twitter:description" content="Self-taught ethical hacker and penetration tester specializing in bug bounty hunting, IDOR/Broken Access Control, and open-source security tooling."/>
+
+<!-- ── Structured Data ── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ashar Dian",
+  "url": "https://ashardian.github.io/",
+  "sameAs": [
+    "https://linkedin.com/in/ashardian",
+    "https://github.com/ashardian"
+  ],
+  "jobTitle": "Ethical Hacker / Penetration Tester",
+  "description": "Self-taught ethical hacker and penetration tester specializing in bug bounty hunting, IDOR/Broken Access Control, and open-source security tooling."
+}
+</script>
 
 <!-- ── CRAWLER / AI BOT BLOCKING ── -->
 <meta name="robots" content="index, follow"/>
@@ -21,8 +51,6 @@
 <meta name="omgili" content="noindex, nofollow"/>
 <meta name="ai" content="noai, noimageai"/>
 <meta property="og:ai" content="noai"/>
-<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
-<meta http-equiv="Pragma" content="no-cache"/>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 <style>
 :root {
@@ -224,8 +252,6 @@ section { position: relative; z-index: 2; }
   color: var(--green);
   margin-bottom: 1.5rem;
   letter-spacing: 2px;
-  opacity: 0;
-  animation: fadeInUp 0.5s ease 0.3s forwards;
   z-index: 1;
   position: relative;
 }
@@ -247,8 +273,6 @@ section { position: relative; z-index: 2; }
   line-height: 1.1;
   position: relative;
   z-index: 1;
-  opacity: 0;
-  animation: fadeInUp 0.7s ease 1s forwards;
   text-shadow: 0 0 40px rgba(0,255,65,0.3);
 }
 .hero-name .glitch {
@@ -291,8 +315,6 @@ section { position: relative; z-index: 2; }
   margin: 1.2rem auto;
   position: relative;
   z-index: 1;
-  opacity: 0;
-  animation: fadeInUp 0.5s ease 1.5s forwards;
 }
 
 .hero-title {
@@ -304,8 +326,6 @@ section { position: relative; z-index: 2; }
   text-transform: uppercase;
   position: relative;
   z-index: 1;
-  opacity: 0;
-  animation: fadeInUp 0.5s ease 1.7s forwards;
   text-shadow: var(--glow-cyan);
 }
 
@@ -316,16 +336,12 @@ section { position: relative; z-index: 2; }
   margin: 1.2rem auto;
   position: relative;
   z-index: 1;
-  opacity: 0;
-  animation: fadeInUp 0.5s ease 2s forwards;
 }
 
 .hero-btns {
   display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
   position: relative; z-index: 1;
   margin-top: 0.5rem;
-  opacity: 0;
-  animation: fadeInUp 0.5s ease 2.3s forwards;
 }
 .btn {
   font-family: 'Share Tech Mono', monospace;
@@ -371,8 +387,6 @@ section { position: relative; z-index: 2; }
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
-  opacity: 0;
-  animation: fadeIn 1s ease 3s forwards;
 }
 .scroll-indicator span {
   font-family: 'Share Tech Mono', monospace;
@@ -803,6 +817,14 @@ footer {
   color: rgb(255, 255, 255);
   letter-spacing: 2px;
 }
+
+html.js-ready .terminal-line { opacity: 0; animation: fadeInUp 0.5s ease 0.3s forwards; }
+html.js-ready .hero-name { opacity: 0; animation: fadeInUp 0.7s ease 1s forwards; }
+html.js-ready .divider-line { opacity: 0; animation: fadeInUp 0.5s ease 1.5s forwards; }
+html.js-ready .hero-title { opacity: 0; animation: fadeInUp 0.5s ease 1.7s forwards; }
+html.js-ready .hero-sub { opacity: 0; animation: fadeInUp 0.5s ease 2s forwards; }
+html.js-ready .hero-btns { opacity: 0; animation: fadeInUp 0.5s ease 2.3s forwards; }
+html.js-ready .scroll-indicator { opacity: 0; animation: fadeIn 1s ease 3s forwards; }
 
 /* ── REVEAL ANIMATIONS ── */
 /* Visible by default so crawlers / no-JS clients see real content.
