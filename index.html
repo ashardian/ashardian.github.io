@@ -1246,19 +1246,6 @@ const barSection = document.getElementById('skill-bars');
 if (barSection) barObserver.observe(barSection);
 
 /* ── BOT / CRAWLER DETECTION & DEFENCE ── */
-(function() {
-  // 1. Known AI & crawler user-agent fragments
-  const botPatterns = [
-    'Googlebot','Bingbot','Slurp','DuckDuckBot','Baiduspider','YandexBot',
-    'Sogou','Exabot','facebot','ia_archiver','CCBot','GPTBot','ChatGPT',
-    'anthropic','Claude','cohere','PerplexityBot','Diffbot','omgili',
-    'DataForSeoBot','AhrefsBot','SemrushBot','MJ12bot','DotBot',
-    'PetalBot','Bytespider','FacebookBot','Applebot','Amazonbot',
-    'meta-externalagent','Scrapy','python-requests','curl','wget','axios',
-    'libwww','HTTrack','WebCopier','SiteSnagger','WebReaper','Teleport'
-  ];
-  const ua = navigator.userAgent || '';
-  const isBot = botPatterns.some(p => ua.toLowerCase().includes(p.toLowerCase()));
 
   // 2. Headless browser detection — only hard automation flags (safe on mobile)
   const isHeadless =
