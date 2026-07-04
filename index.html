@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="google-site-verification" content="E5T0jOvK95hP-7cuhgFRff2K5DGDs2rpbHlcYJg5IN4" /> 
 <title>Ashar Dian | Ethical Hacker Portfolio</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 <style>
 :root {
@@ -788,27 +787,34 @@ footer {
 }
 
 /* ── REVEAL ANIMATIONS ── */
-.reveal {
+/* Visible by default so crawlers / no-JS clients see real content.
+   Hidden starting state only applies once JS confirms it's running
+   (html.js-ready class added at the top of <script>). */
+.reveal, .reveal-left, .reveal-right {
+  opacity: 1;
+  transform: none;
+}
+html.js-ready .reveal {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.reveal.visible {
+html.js-ready .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
-.reveal-left {
+html.js-ready .reveal-left {
   opacity: 0;
   transform: translateX(-40px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.reveal-left.visible { opacity: 1; transform: translateX(0); }
-.reveal-right {
+html.js-ready .reveal-left.visible { opacity: 1; transform: translateX(0); }
+html.js-ready .reveal-right {
   opacity: 0;
   transform: translateX(40px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.reveal-right.visible { opacity: 1; transform: translateX(0); }
+html.js-ready .reveal-right.visible { opacity: 1; transform: translateX(0); }
 
 /* ── FADE KEYFRAMES ── */
 @keyframes fadeInUp {
@@ -1159,6 +1165,10 @@ footer {
 </footer>
 
 <script>
+/* Mark that JS is running — enables the reveal animation CSS.
+   Crawlers / no-JS clients never add this, so they see full content immediately. */
+document.documentElement.classList.add('js-ready');
+
 /* ── MATRIX RAIN ── */
 const canvas = document.getElementById('matrix-bg');
 const ctx = canvas.getContext('2d');
