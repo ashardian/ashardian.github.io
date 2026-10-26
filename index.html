@@ -928,6 +928,27 @@ html.js-ready .reveal-right.visible { opacity: 1; transform: translateX(0); }
    swallowing every click. pointer-events: none makes them visual-only. */
 .project-card::before,
 .project-card::after { pointer-events: none; }
+
+/* ── PERFORMANCE: phones & touch screens only (laptop view is unchanged) ──
+   These effects are nearly invisible on a small screen but force the phone to
+   re-composite full-screen layers on every scroll frame. */
+@media (max-width: 900px), (hover: none) {
+  body::before, body::after { display: none; }              /* full-screen noise + scan-line overlays */
+  nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(1,8,4,0.96); }
+  .project-img, .pdf-img, .whoami-img-wrap img { filter: none; }  /* per-image CSS filters */
+  .project-img { opacity: 0.85; }                                  /* keeps the slightly dimmed look, much cheaper */
+  .whoami-img-wrap::before, .whoami-img-wrap::after { animation: none; }  /* two endlessly rotating borders */
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-grid-bg, .glitch::before, .glitch::after,
+  .whoami-img-wrap::before, .whoami-img-wrap::after, .scroll-arrow { animation: none !important; }
+}
+
+/* ── WHOAMI IMAGE: width/height attributes should only reserve space, not force a size.
+   Without this the photo was forced to 450px tall (stretched on laptops) and 800px wide
+   (wider than a phone screen), which made the whole page scroll sideways on Android. ── */
+.whoami-img-wrap img { height: auto; }
+.whoami-grid > * { min-width: 0; }
 </style>
 </head>
 <body>
@@ -1289,13 +1310,23 @@ document.documentElement.classList.add('js-ready');
 /* ── MATRIX RAIN ── */
 const canvas = document.getElementById('matrix-bg');
 const ctx = canvas.getContext('2d');
-function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
 const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF<>{}[]|\\/?';
 const fontSize = 13;
-let cols = Math.floor(canvas.width / fontSize);
-let drops = Array(cols).fill(1);
+const lowPower = window.matchMedia('(max-width: 900px), (hover: none)').matches;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let cols = 0, drops = [], lastWidth = 0;
+function resizeCanvas() {
+  // Android fires "resize" every time the address bar shows/hides while scrolling.
+  // Resizing a canvas clears and reallocates it, so only react to real width changes.
+  if (window.innerWidth === lastWidth) return;
+  lastWidth = window.innerWidth;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  cols = Math.floor(canvas.width / fontSize);
+  drops = Array(cols).fill(1);
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 function drawMatrix() {
   ctx.fillStyle = 'rgba(1,8,4,0.05)';
   ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -1308,7 +1339,23 @@ function drawMatrix() {
     drops[i]++;
   }
 }
-setInterval(drawMatrix, 50);
+// Phones: half the frame rate, and no drawing while the user is scrolling.
+// Laptops: same 20 fps as before. Paused automatically in background tabs (requestAnimationFrame).
+const FRAME_MS = lowPower ? 100 : 50;
+let lastFrame = 0, isScrolling = false, scrollTimer;
+window.addEventListener('scroll', () => {
+  isScrolling = true;
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(() => { isScrolling = false; }, 150);
+}, { passive: true });
+function matrixLoop(t) {
+  if (t - lastFrame >= FRAME_MS) {
+    lastFrame = t;
+    if (!(lowPower && isScrolling)) drawMatrix();
+  }
+  requestAnimationFrame(matrixLoop);
+}
+if (!reduceMotion) requestAnimationFrame(matrixLoop);
 
 /* ── TYPEWRITER ── */
 const typeEl = document.getElementById('typed-text');
